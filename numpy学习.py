@@ -106,7 +106,7 @@ print(type(list_a))
 
 '''
 import random
-#返回数组中每个元素的字节单位长度，dtype设置数据类型
+#返回数组中每个元素的字节单位长度, dtype设置数据类型
 f=np.array([1,2,3,4,5],dtype=np.int16)
 print(f.itemsize)# 1 np.int8(一个字节)
 #获取数据类型
@@ -121,3 +121,22 @@ arr=np.array([random.random() for i in range(10)])
 #取小数点后两位
 print(np.round(arr,2))
 '''
+
+"""
+t1 = np.arange(24).reshape((4,6))
+t2 = np.arange(18).reshape((3,6))
+print(t1)
+print(t2)
+print(t1-t2)
+'''
+ValueError: operands could not be broadcast together with shapes (4,6) (3,6)
+'''
+"""
+
+'''
+a = np.arange(10)
+print(a[2],a)
+print(a[2:])
+'''
+
+
