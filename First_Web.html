@@ -194,23 +194,6 @@
 
     <!-- JavaScript 逻辑 -->
     <script>
-        function openLightbox(event) {
-            // 这行代码是阻止原本 a 标签默认的“直接跳转”行为
-            // 因为如果是同页面跳转，用户就看不到放大效果了。
-            // 但如果你想既放大又在新标签页打开，可以把这段注释掉
-            event.preventDefault();
-
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightboxImg');
-            const sourceImg = document.getElementById('myImage');
-
-            // 把被点击图片的地址给放大层的图片
-            lightboxImg.src = sourceImg.src;
-
-            // 显示放大层
-            lightbox.classList.add('active');
-        }
-
         function closeLightbox(event) {
             // 如果用户点击的是中间的图片或者按钮，不关闭遮罩层
             if (event.target.id === 'lightboxImg' || event.target.className === 'story-btn') {
