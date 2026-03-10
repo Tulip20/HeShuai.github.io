@@ -44,21 +44,184 @@
             font-size: 1.1rem;
             line-height: 1.5;
         }
+
+        /* 打字机特效的光标动画 */
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        /* 打字机特效的打字动画 */
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        /* 打字机标题样式 */
+        .typewriter h1 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            /* 隐藏未打出的文字 */
+            border-right: 3px solid #3498db;
+            /* 光标 */
+            white-space: nowrap;
+            /* 保持在一行 */
+            margin: 0 auto 1rem auto;
+            /* 居中显示 */
+            letter-spacing: 2px;
+            /* 动画：打字2秒完成，步数根据字数大致调整，光标闪烁无限次 */
+            animation:
+                typing 2s steps(12, end),
+                blink .75s step-end infinite;
+            width: fit-content;
+            /* 宽度适应内容 */
+        }
+
+        /* --- 图片放大Lightbox效果的CSS --- */
+        .lightbox-overlay {
+            display: none;
+            /* 默认隐藏 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            /* 半透明黑背景 */
+            z-index: 1000;
+            /* 置于顶层 */
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+            /* 激活时显示并居中 */
+            opacity: 1;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-overlay.active .lightbox-img {
+            transform: scale(1);
+            /* 弹出时的一点放大效果 */
+        }
+
+        /* 针对包含链接的图片容器做调整 */
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 将原来的A标签稍微修改，加上鼠标指针样式 */
+        .image-container img {
+            cursor: pointer;
+            /* 提示可以点击 */
+            transition: transform 0.2s ease;
+            max-width: 100%;
+            max-height: 250px;
+            border-radius: 8px;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.05);
+            /* 悬浮时小幅度放大 */
+        }
+
+        /* 给放大层里的专门加一个去听故事的按钮 */
+        .lightbox-overlay .story-btn {
+            position: absolute;
+            bottom: 30px;
+            padding: 12px 30px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.2s, transform 0.2s;
+            z-index: 1001;
+        }
+
+        .lightbox-overlay .story-btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>你好，鸭福！ 👋</h1>
+        <!-- 给h1包一层class用来执行打字机 -->
+        <div class="typewriter">
+            <h1>你好，鸭福！ 👋</h1>
+        </div>
         <p>这是我的第一个网站。</p>
         <p>随便写点东西，测试一下效果。</p>
         <br>
-        <a href="http://127.0.0.1:5500/Web_Study/Second_Web.html" target="_blank">
-            <img src="./images/1693496738524.jpeg" alt="帅哥"
-                style="max-width: 100%; max-height: 250px; border-radius: 8px;">
-        </a>
+        <!-- 我们把跳转加回来了，并且保留了放大功能 -->
+        <div class="image-container">
+            <a href="http://127.0.0.1:5500/Second_Web.html" target="_blank" onclick="openLightbox(event)">
+                <img id="myImage" src="./images/1693496738524.jpeg" alt="帅哥">
+            </a>
+        </div>
         <p> 你想听我的故事吗？点击上面的图片 hhh</p>
     </div>
+
+    <!-- 这是点击图片后弹出的全屏覆盖层 -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <img class="lightbox-img" id="lightboxImg" src="">
+        <!-- 放大的时候也可以直接点按钮跳转，体验更好 -->
+        <a href="http://127.0.0.1:5500/Second_Web.html" target="_blank" class="story-btn">去听听我的故事 →</a>
+    </div>
+
+    <!-- JavaScript 逻辑 -->
+    <script>
+        function openLightbox(event) {
+            // 这行代码是阻止原本 a 标签默认的“直接跳转”行为
+            // 因为如果是同页面跳转，用户就看不到放大效果了。
+            // 但如果你想既放大又在新标签页打开，可以把这段注释掉
+            event.preventDefault();
+
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const sourceImg = document.getElementById('myImage');
+
+            // 把被点击图片的地址给放大层的图片
+            lightboxImg.src = sourceImg.src;
+
+            // 显示放大层
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox(event) {
+            // 如果用户点击的是中间的图片或者按钮，不关闭遮罩层
+            if (event.target.id === 'lightboxImg' || event.target.className === 'story-btn') {
+                return;
+            }
+
+            const lightbox = document.getElementById('lightbox');
+            // 隐藏放大层
+            lightbox.classList.remove('active');
+        }
+    </script>
 </body>
 
 </html>
