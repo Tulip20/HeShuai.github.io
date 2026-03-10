@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的第一个网站</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            padding: 2.5rem 8rem; /* 左右内边距加大，将其拉长 */
+            min-width: 400px; /* 增加一个最小宽度，保证哪怕文字少也会很宽 */
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>你好，鸭福！ 👋</h1>
+        <p>这是我的第一个网站。</p>
+        <p>随便写点东西，测试一下效果。</p>
+        <br>
+        <a href="http://127.0.0.1:5500/Web_Study/Second_Web.html"
+            target="_blank">
+            <img src="./images/1693496738524.jpeg" alt="帅哥"
+                style="max-width: 100%; max-height: 250px; border-radius: 8px;">
+        </a>
+        <p> 你想听我的故事吗？点击上面的图片 </p>
+    </div>
+</body>
+
+</html>

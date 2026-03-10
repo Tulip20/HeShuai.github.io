@@ -1,0 +1,30 @@
+name: Sync Web_Study to Another Repo
+
+on:
+  push:
+    branches:
+      - main  # 如果您的主分支是 master，请将这里的 main 改为 master
+    paths:
+      - 'Web_Study/**'  # 设置为只有当 Web_Study 文件夹里的代码发生改动时，才触发同步
+
+jobs:
+  sync-to-another-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Push Web_Study folder to target repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          # 取一个名字叫 SYNC_TOKEN 的密钥，稍后要在 GitHub 网页上配置它
+          API_TOKEN_GITHUB: ${{ secrets.SYNC_TOKEN }} 
+        with:
+          source-directory: 'Web_Study'            # 我们只要同步本地的 Web_Study 文件夹
+          destination-github-username: '替换成你的_GitHub_用户名'  # 目标仓库所属的用户名
+          destination-repository-name: '替换成目标仓库的_名字'     # 目标仓库名 (比如 my-web-study)
+          user-email: '替换成你的_GitHub_绑定邮箱'             # 你的邮箱
+          target-branch: 'main'                    # 目标仓库的分支 (通常是 main)
+          commit-message: 'Auto Update Web_Study content' # 自动提交的信息
