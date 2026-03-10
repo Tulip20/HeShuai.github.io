@@ -1,17 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>听我的故事</title>
+    <style>
+        body {
+            /* 让页面内容垂直水平居中 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .message-box {
+            background: white;
+            padding: 3rem 6rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            /* 文本内部居中 */
+            font-size: 3rem;
+            /* 放大整个字号 */
+            color: #2c3e50;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .message-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        p {
+            margin: 0;
+            line-height: 1.5;
+        }
+    </style>
 </head>
+
 <body>
-    <div>
-        <p> 
+    <div class="message-box">
+        <p>
             还真想听呢！宝贝
             <br>
-            收费<span style="color: red;">三伯</span>
+            收费<span style="color: #e74c3c; font-size: 4rem;">三伯大洋</span>
         </p>
     </div>
 </body>
+
 </html>
