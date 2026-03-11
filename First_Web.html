@@ -84,6 +84,49 @@
             /* 宽度适应内容 */
         }
 
+        /* 彩色旋转星球 */
+        .photo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .planet {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            /* 基础颜色作为海洋（蓝），叠加多个边缘清晰的白色渐变拼凑成陆地板块 */
+            background-color: #3b9eeb; 
+            background-image: 
+                /* 亚洲、欧洲、非洲概貌 */
+                radial-gradient(ellipse at 25% 30%, white 15%, transparent 18%),
+                radial-gradient(ellipse at 35% 45%, white 12%, transparent 15%),
+                radial-gradient(ellipse at 15% 40%, white 10%, transparent 13%),
+                /* 美洲概貌 */
+                radial-gradient(ellipse at 75% 30%, white 14%, transparent 17%),
+                radial-gradient(ellipse at 82% 60%, white 10%, transparent 13%),
+                radial-gradient(ellipse at 70% 45%, white 6%, transparent 9%),
+                /* 澳洲及其它岛屿 */
+                radial-gradient(circle at 45% 65%, white 6%, transparent 8%),
+                radial-gradient(circle at 55% 50%, white 4%, transparent 6%),
+                /* 南极洲 */
+                radial-gradient(ellipse at 50% 95%, white 20%, transparent 25%);
+            background-size: 180px 90px;
+            background-repeat: repeat-x; /* 保证水平循环自转 */
+            /* 内部阴影营造球体立体感，外部淡蓝色发光 */
+            box-shadow: inset -16px -16px 20px rgba(0,0,0,0.5), inset 10px 10px 20px rgba(255,255,255,0.4), 0 0 15px rgba(100, 150, 255, 0.4);
+            /* 现实中地球自西向东自转 */
+            animation: spinEarth 12s linear infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes spinEarth {
+            0% { background-position-x: 0px; }
+            100% { background-position-x: -180px; }
+        }
+
         /* --- 图片放大Lightbox效果的CSS --- */
         .lightbox-overlay {
             display: none;
@@ -164,6 +207,12 @@
             background-color: #2980b9;
             transform: scale(1.05);
         }
+
+        .container p:last-of-type::after {
+            content: url("./images/hotboard_hot.428fe145.svg");
+            margin-left: 8px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 
@@ -177,12 +226,17 @@
         <p>随便写点东西，测试一下效果。</p>
         <br>
         <!-- 我们把跳转加回来了，并且保留了放大功能 -->
-        <div class="image-container">
-            <a href="https://tulip20.github.io/HeShuai.github.io/Second_Web.html" target="_blank">
-                <img id="myImage" src="images/1693496738524.jpeg" alt="我是帅哥" title="帅哥">
-            </a>
+        <div class="photo-wrapper">
+            <!-- 彩色旋转星球 -->
+            <div class="planet"></div>
+            
+            <div class="image-container">
+                <a href="https://tulip20.github.io/HeShuai.github.io/Second_Web.html" target="_blank">
+                    <img id="myImage" src="images/1693496738524.jpeg" alt="我是帅哥" title="帅哥">
+                </a>
+            </div>
         </div>
-        <p> 你想听我的<span style="color: #f72222fb; font-weight: bold;">故事</span>吗？点击上面的图片 hhh</p>
+        <p> 你想听我的<span style="color: #f72222fb; font-weight: bold;">故事</span>吗？点击上面的图片 </p>
     </div>
 
     <!-- 这是点击图片后弹出的全屏覆盖层 -->
